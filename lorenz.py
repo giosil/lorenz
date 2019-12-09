@@ -26,8 +26,7 @@ def getOption():
     
     return opt
 
-# Ask option
-
+# Begin
 opt = getOption()
 if opt == 4:
     print("bye")
