@@ -2,17 +2,6 @@ import sys
 
 from turtle import Turtle, Screen
 
-M = 1
-N = 30000
-u0 = 0.82
-v0 = 0.63
-w0 = 0.74
-
-s = 16.0
-r = 46.5
-b = 4.0
-h = 0.001
-
 options = {
     1: "graph u-v",
     2: "graph u-w",
@@ -20,19 +9,26 @@ options = {
     4: "exit"
 }
 
-print("Lorenz attractor simulator")
-print("==========================")
-print("Select option:\n")
-for key,val in options.items():
-    print("\t", key, " = ", val)
-print("")
+def getOption():
+    print("Lorenz attractor simulator")
+    print("==========================")
+    
+    print("Select option:\n")
+    for key,val in options.items():
+        print("\t", key, " = ", val)
+    print("")
+    
+    opt = 0
+    while opt < 1 or opt > 4:
+        opt = int(input("option [1-4]: "))
+        if opt < 1 or opt > 4:
+            print("Invalid option")
+    
+    return opt
 
-opt = 0
-while opt < 1 or opt > 4:
-    opt = int(input("option [1-4]: "))
-    if opt < 1 or opt > 4:
-        print("Invalid option")
+# Ask option
 
+opt = getOption()
 if opt == 4:
     print("bye")
     sys.exit(0)
@@ -62,10 +58,26 @@ turtle.right(90)
 turtle.pendown()
 turtle.forward(max * 2 * 100)
 
+# Draw graph title
 turtle.penup()
 turtle.goto(-max * 100 + 8, max * 100 - 10)
 turtle.pendown()
 turtle.write(options.get(opt, ""))
+
+# Parameters
+M = 1
+N = 30000
+u0 = 0.82
+v0 = 0.63
+w0 = 0.74
+
+s = 16.0
+r = 46.5
+b = 4.0
+h = 0.001
+
+fast = 5
+p = 0
 
 # Draw start values
 u = u0
@@ -80,12 +92,6 @@ elif opt == 2:
 elif opt == 3:
     turtle.goto(round(u * 100), round(w * 100))
 turtle.pendown()
-
-# Draw graph title
-
-# Drawing Parameters
-fast = 5
-p = 0
 
 # Draw graph
 us = 0
