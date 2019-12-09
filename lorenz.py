@@ -1,11 +1,6 @@
+import sys
+
 from turtle import Turtle, Screen
-
-screen = Screen()
-screen.setworldcoordinates(-400, -400, 400, 400)
-
-turtle = Turtle()
-turtle.speed('fastest')
-turtle.penup();
 
 M = 1
 N = 30000
@@ -25,6 +20,41 @@ us = 0
 vs = 0
 ws = 0
 
+options = {
+    1: "graph u-v",
+    2: "graph u-w",
+    3: "graph v-w",
+    4: "exit"
+}
+
+print("Lorenz attractor simulator")
+print("==========================")
+print("Select option:\n")
+for key,val in options.items():
+    print("\t", key, " = ", val)
+print("")
+
+opt = 0
+while opt < 1 or opt > 4:
+    opt = int(input("option [1-4]: "))
+    if opt < 1 or opt > 4:
+        print("Invalid option")
+
+if opt == 4:
+    print("bye")
+    sys.exit(0)
+
+print("Selected option: ", options.get(opt, "Invalid option"))
+
+#Init turtle
+screen = Screen()
+screen.setworldcoordinates(-400, -400, 400, 400)
+
+turtle = Turtle()
+turtle.speed('fastest')
+turtle.penup();
+
+#Draw axis
 turtle.pencolor('#dddddd')
 turtle.penup()
 turtle.goto(-400,0)
@@ -37,14 +67,17 @@ turtle.right(90)
 turtle.pendown()
 turtle.forward(800)
 
+#Draw axis
 turtle.pencolor('black')
 turtle.penup()
 turtle.goto(round(u * 100), round(v * 100));
 turtle.pendown()
 
+#Drawing Parameters
 fast = 5
-count = -1
+p = 0
 
+#Draw graph
 for j in range(N):
     for i in range(M):
         us = u + h*s*(v - u)
@@ -55,11 +88,16 @@ for j in range(N):
         v = vs
         w = ws
 
-        count = count + 1
-        if count % fast != 0:
+        p = p + 1
+        if p % fast != 0:
             continue;
-        
-        turtle.goto(round(u * 100), round(v * 100));
-        turtle.pendown()
 
+        if opt == 1:
+            turtle.goto(round(u * 100), round(v * 100))
+        elif opt == 2:
+            turtle.goto(round(v * 100), round(w * 100))
+        elif opt == 3:
+            turtle.goto(round(u * 100), round(w * 100))
+        
+#Wait click to exit
 screen.exitonclick()
