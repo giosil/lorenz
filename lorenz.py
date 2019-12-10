@@ -9,7 +9,7 @@ options = {
     4: "exit"
 }
 
-def getOption():
+def askForOption():
     print("Lorenz attractor simulator")
     print("==========================")
     
@@ -27,18 +27,18 @@ def getOption():
     return opt
 
 # Begin
-opt = getOption()
+opt = askForOption()
 if opt == 4:
     print("bye")
     sys.exit(0)
 
 print("Selected option: ", options.get(opt, "Invalid option"))
 
-max = 4
+max_value = 4
 
 # Init turtle
 screen = Screen()
-screen.setworldcoordinates(-max * 100, -max * 100, max * 100, max * 100)
+screen.setworldcoordinates(-max_value * 100, -max_value * 100, max_value * 100, max_value * 100)
 
 turtle = Turtle()
 turtle.speed('fastest')
@@ -47,19 +47,19 @@ turtle.penup();
 # Draw axis
 turtle.pencolor('#dddddd')
 turtle.penup()
-turtle.goto(-max * 100, 0)
+turtle.goto(-max_value * 100, 0)
 turtle.pendown()
-turtle.forward(max * 2 * 100)
+turtle.forward(max_value * 2 * 100)
 
 turtle.penup()
-turtle.goto(0, max * 100)
+turtle.goto(0, max_value * 100)
 turtle.right(90)
 turtle.pendown()
-turtle.forward(max * 2 * 100)
+turtle.forward(max_value * 2 * 100)
 
 # Draw graph title
 turtle.penup()
-turtle.goto(-max * 100 + 8, max * 100 - 10)
+turtle.goto(-max_value * 100 + 8, max_value * 100 - 10)
 turtle.pendown()
 turtle.write(options.get(opt, ""))
 
