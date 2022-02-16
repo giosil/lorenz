@@ -42,7 +42,7 @@ screen.setworldcoordinates(-max_value * 100, -max_value * 100, max_value * 100, 
 
 turtle = Turtle()
 turtle.speed('fastest')
-turtle.penup();
+turtle.penup()
 
 # Draw axis
 turtle.pencolor('#dddddd')
